@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgba(239, 239, 239, 1);
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background-color: rgba(2, 39, 109, 0.6);
+  box-shadow: 0px 4px 4px rgba(18, 19, 26, 0.25);
+}
+.contentNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 1.875rem;
+  color: white;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contentNav h1 {
+  font-size: clamp(1.75rem, 2.5vw, 2.2rem);
+  text-align: center;
+}
+.contentNav small {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  text-align: center;
+  margin-top: -0.3125rem;
+}
+
+/* Conteúdo da página */
+.content {
+  padding: 1.5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Tabela */
+.gridRow {
+  display: grid;
+  grid-template-columns: 4fr 1.5fr 1fr 1fr 1fr 1.5fr 1fr;
+  align-items: center;
+  gap: 0.625rem;
+  padding-left: 0.3125rem;
+}
+.tableHeader {
+  background-color: rgba(225, 227, 233, 1);
+  font-weight: 600;
+  margin-top: 0.625rem;
+  border-bottom: 2px solid #ccc;
+  height: 3.125rem; /* 50px */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0.3125rem;
+}
+
+/* Item da tabela (funcionário) */
+.Item {
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  min-height: 2.5rem;
+  padding: 0.3125rem;
+}
+.textName {
+  max-width: 650px;
+  word-wrap: break-word;
+}
+
+/* Status */
+.ferias,
+.semAgendamento,
+.agendado,
+.finalizado {
+  color: white;
+  border-radius: 50px;
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.875rem;
+}
+.ferias {
+  background-color: #a8c686;
+  width: 60px;
+}
+.semAgendamento {
+  background-color: #4d4d4dff;
+  width: 155px;
+}
+.agendado {
+  background-color: #8daac1;
+  width: 90px;
+}
+.finalizado {
+  background-color: #e4d552ff;
+  width: 145px;
+}
+
+/* Botões */
+.abrirEditar {
+  margin-left: auto;
+  margin-right: 5rem;
+  color: rgba(2, 39, 109, 0.6);
+}
+
+.abrirCadastro {
+  border: none;
+  border-radius: 15px;
+  color: white;
+  width: 40px;
+  background-color: rgba(2, 39, 109, 0.6);
+  padding: 0.4rem;
+  margin-right: 2rem;
+  cursor: pointer;
+}

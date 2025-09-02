@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.back {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container do formulário */
+.container {
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: 500px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.containerHeader {
+  background-color: rgba(225, 227, 233, 1);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Formulário */
+.form {
+  padding: 20px;
+}
+.form-control {
+  padding-bottom: 25px;
+  position: relative;
+}
+
+.form-control label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  display: block;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 100%;
+  padding: 12px;
+}
+input[type="date"] {
+  color: #000000ff;
+}
+input::placeholder {
+  color: #000000ff;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.invisivel {
+  display: none;
+}
+
+.form-control select {
+  border: 2px solid #f0f0f0;
+  display: block;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 100%;
+  padding: 12px;
+  color: #000000ff;
+}
+
+.form-control-days {
+  justify-content: space-around;
+  padding-bottom: 20px;
+  text-align: center;
+  font-weight: 450;
+  display: none;
+}
+
+/* Mensagem de erro */
+.form-control small {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  font-size: 12px;
+  visibility: hidden;
+}
+
+/* Botões */
+.form button {
+  background-color: rgba(2, 39, 109, 0.6);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.form button:hover {
+  background-color: rgba(48, 88, 161, 0.6);
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Validação do input */
+.form-control.success input,
+.form-control.success select {
+  border-color: #2ecc71;
+}
+
+.form-control.error input,
+.form-control.error select {
+  border-color: #e74c3c;
+}
+
+.form-control.error small {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+/* Checkbox*/
+.form-control-status {
+  display: flex;
+  gap: 5px;
+  padding-bottom: 25px;
+}

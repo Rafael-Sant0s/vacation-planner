@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styleIndex.css" />
+    <link rel="icon" href="img/VacationPlan.jpg" type="image/jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <title>VacationPlanner</title>
+  </head>
+  <body>
+    <div id="telaCadastro" style="display: none"></div>
+    <div id="telaEditar" style="display: none"></div>
+    <div class="telaPrincipal" id="telaPrincipal">
+      <nav class="navbar">
+        <div class="contentNav">
+          <div class="brand">
+            <h1>VacationPlanner</h1>
+            <small>Planeje as férias da sua empresa!</small>
+          </div>
+        </div>
+      </nav>
+
+      <div class="content">
+        <div class="header">
+          <h2>Funcionários cadastrados</h2>
+          <button class="abrirCadastro">
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </div>
+
+        <div class="tableHeader gridRow">
+          <div>Nome</div>
+          <div>Setor</div>
+          <div>Matrícula</div>
+          <div>Início</div>
+          <div>Fim</div>
+          <div>Status</div>
+          <div></div>
+        </div>
+
+        <div class="table">
+          <div class="func"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>

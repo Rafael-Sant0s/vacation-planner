@@ -1,0 +1,81 @@
+<div class="back">
+  <div class="container">
+    <div class="containerHeader">
+      <h2>Cadastrar um funcionário</h2>
+    </div>
+    <form id="form" class="form">
+      <div class="form-control">
+        <label for="funcName">Nome:</label>
+        <input
+          type="text"
+          id="funcName"
+          placeholder="Digite o nome do funcionário"
+        />
+
+        <small>Mensagem de erro</small>
+      </div>
+
+      <div class="form-control">
+        <label for="matricula">Matrícula:</label>
+        <input
+          type="number"
+          id="matricula"
+          placeholder="Digite a matrícula..."
+        />
+
+        <small>Mensagem de erro</small>
+        <input type="hidden" id="matriculaOriginal" />
+      </div>
+
+      <div class="form-control">
+        <label for="setor">Setor:</label>
+
+        <select id="setor" name="setor">
+          <option value="" disabled selected hidden>Selecione um setor</option>
+          <option value="presidencia">PRESIDÊNCIA</option>
+          <option value="juridica">ASSESSORIA JURÍDICA</option>
+          <option value="comunicacao">COMUNICAÇÃO</option>
+          <option value="dirAdm">DIRETORIA ADMINISTRATIVA</option>
+          <option value="dirCult">DIRETORIA CULTURAL</option>
+          <option value="contratos">CONTRATOS</option>
+          <option value="arquivo">ARQUIVO PÚBLICO</option>
+          <option value="lif">LIF/FMC</option>
+          <option value="gac">GAC</option>
+          <option value="gef">GEF</option>
+          <option value="gos">GOS</option>
+          <option value="gpc">GPC</option>
+          <option value="gph">GPH</option>
+          <option value="grh">GRH</option>
+          <option value="grm">GRM</option>
+          <option value="gsa">GSA</option>
+          <option value="gsi">GSI</option>
+        </select>
+
+        <small>Mensagem de erro</small>
+      </div>
+
+      <div class="form-control" id="inicio-container">
+        <label for="inicio">Início das férias:</label>
+        <input type="date" id="inicio" min="2025-05-01" max="2035-12-31" />
+
+        <small>Mensagem de erro</small>
+      </div>
+
+      <div class="form-control" id="fim-container">
+        <label for="fim">Fim das férias:</label>
+        <input type="date" id="fim" min="2025-05-01" max="2035-12-31" />
+
+        <small>Mensagem de erro</small>
+      </div>
+
+      <div class="form-control-status">
+        <p>Sem férias para agendamento</p>
+        <input type="checkbox" id="checkbox" />
+      </div>
+      <div class="buttons">
+        <button type="submit" id="btnCadastrar">Cadastrar</button>
+        <button type="button" id="btnCancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
