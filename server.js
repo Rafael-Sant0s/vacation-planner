@@ -14,6 +14,11 @@ const pool = new Pool({
   },
 });
 
+pool
+  .connect()
+  .then(() => console.log("✅ Conectado ao banco PostgreSQL!"))
+  .catch((err) => console.error("❌ Erro na conexão com o banco:", err));
+
 app.use(express.static("public"));
 
 app.use(
@@ -46,11 +51,13 @@ app.use(express.json({ limit: "10kb" }));
 
 (async () => {
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS items (
-      matricula VARCHAR(50) PRIMARY KEY,
-      nome TEXT,
-      email TEXT
-    )
+   CREATE TABLE IF NOT EXISTS items (
+  matricula VARCHAR(50) PRIMARY KEY,
+  funcName TEXT,
+  setor TEXT,
+  inicio TEXT,
+  fim TEXT
+);
   `);
 })();
 
@@ -60,19 +67,20 @@ app.get("/items", async (req, res) => {
 });
 
 app.post("/items", async (req, res) => {
-  const { matricula, nome, email } = req.body;
+  const { matricula, funcName, setor, inicio, fim } = req.body;
 
   try {
     await pool.query(
-      "INSERT INTO items (matricula, nome, email) VALUES ($1, $2, $3)",
-      [matricula, nome, email]
+      "INSERT INTO items (matricula, funcName, setor, inicio, fim) VALUES ($1, $2, $3, $4, $5)",
+      [matricula, funcName, setor, inicio, fim]
     );
-    res.status(201).json({ matricula, nome, email });
+    res.status(201).json({ matricula, funcName, setor, inicio, fim });
   } catch (err) {
     if (err.code === "23505") {
       // Duplicado
       res.status(409).json({ error: "Matrícula já existe." });
     } else {
+      console.error(err);
       res.status(500).json({ error: "Erro ao salvar item." });
     }
   }
@@ -80,17 +88,22 @@ app.post("/items", async (req, res) => {
 
 app.put("/items/:matricula", async (req, res) => {
   const { matricula } = req.params;
-  const { nome, email } = req.body;
+  const { funcName, setor, inicio, fim } = req.body;
 
-  const result = await pool.query(
-    "UPDATE items SET nome = $1, email = $2 WHERE matricula = $3 RETURNING *",
-    [nome, email, matricula]
-  );
+  try {
+    const result = await pool.query(
+      "UPDATE items SET funcName = $1, setor = $2, inicio = $3, fim = $4 WHERE matricula = $5 RETURNING *",
+      [funcName, setor, inicio, fim, matricula]
+    );
 
-  if (result.rowCount === 0) {
-    res.status(404).send("Item não encontrado.");
-  } else {
-    res.json(result.rows[0]);
+    if (result.rowCount === 0) {
+      res.status(404).send("Item não encontrado.");
+    } else {
+      res.json(result.rows[0]);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erro ao atualizar item." });
   }
 });
 

@@ -1,4 +1,4 @@
-const API_URL = "https://meu-backend.onrender.com";
+const API_URL = "https://vacation-planner-dzc6.onrender.com";
 
 // Altera o estado das telas.
 const toggleTela = (telaId, show) => {
