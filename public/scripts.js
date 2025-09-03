@@ -77,7 +77,7 @@ const refreshItemsUsingAPI = async () => {
       const tableItemContainer = document.createElement("div");
       tableItemContainer.classList.add("Item", "gridRow");
 
-      const funcName = createTextDiv(item.funcName);
+      const funcName = createTextDiv(item.func_name);
       funcName.classList.add("textName");
       const setor = createTextDiv(item.setor);
       const matricula = createTextDiv(item.matricula);
@@ -335,7 +335,7 @@ function inicializarCadastro(telaId) {
     const statusClasse = calcularStatus(inicioValue, fimValue);
 
     const item = {
-      funcName: funcName.value,
+      func_name: funcName.value.toUpperCase(),
       setor: setor.options[setor.selectedIndex].text,
       matricula: matricula.value,
       inicio: checkboxState.checked ? "-----" : inicio.value,
@@ -343,7 +343,7 @@ function inicializarCadastro(telaId) {
       statusClass: statusClasse,
     };
 
-    const funcNameDiv = createTextDiv(item.funcName.toUpperCase());
+    const funcNameDiv = createTextDiv(item.func_name.toUpperCase());
     funcNameDiv.classList.add("textName");
     const setorDiv = createTextDiv(item.setor.toUpperCase());
     const matriculaDiv = createTextDiv(item.matricula);
@@ -477,7 +477,7 @@ function inicializarCadastro(telaId) {
       }
 
       const updatedItem = {
-        funcName: funcName.value.toUpperCase(),
+        func_name: funcName.value.toUpperCase(),
         setor: setor.options[setor.selectedIndex].text.toUpperCase(),
         matricula: matricula.value,
         inicio: checkboxState.checked ? "-----" : inicio.value,
@@ -566,7 +566,7 @@ function preencherFormulario(item) {
   const telaEditar = document.getElementById("telaEditar");
   if (!telaEditar) return;
 
-  telaEditar.querySelector("#funcName").value = item.funcName;
+  telaEditar.querySelector("#funcName").value = item.func_name;
   telaEditar.querySelector("#matricula").value = item.matricula;
   const selectSetor = telaEditar.querySelector("#setor");
 

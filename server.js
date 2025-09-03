@@ -30,7 +30,7 @@ app.use(
 const allowedOrigins = [
   "http://127.0.0.1:5500", // Frontend local (VS Code Live Server, por exemplo)
   "http://localhost:5500", // Outro possível localhost
-  "https://deft-nougat-3896c2.netlify.app", // Frontend em produção
+  "https://vacation-planner-dzc6.onrender.com", // Frontend em produção
 ];
 
 app.use(
@@ -51,13 +51,13 @@ app.use(express.json({ limit: "10kb" }));
 
 (async () => {
   await pool.query(`
-   CREATE TABLE IF NOT EXISTS items (
-  matricula VARCHAR(50) PRIMARY KEY,
-  funcName TEXT,
-  setor TEXT,
-  inicio TEXT,
-  fim TEXT
-);
+    CREATE TABLE IF NOT EXISTS items (
+      matricula VARCHAR(50) PRIMARY KEY,
+      func_name TEXT,
+      setor TEXT,
+      inicio TEXT,
+      fim TEXT
+    );
   `);
 })();
 
@@ -67,33 +67,36 @@ app.get("/items", async (req, res) => {
 });
 
 app.post("/items", async (req, res) => {
-  const { matricula, funcName, setor, inicio, fim } = req.body;
+  const { matricula, func_name, setor, inicio, fim } = req.body;
 
   try {
     await pool.query(
-      "INSERT INTO items (matricula, funcName, setor, inicio, fim) VALUES ($1, $2, $3, $4, $5)",
-      [matricula, funcName, setor, inicio, fim]
+      "INSERT INTO items (matricula, func_name, setor, inicio, fim) VALUES ($1, $2, $3, $4, $5)",
+      [matricula, func_name, setor, inicio, fim]
     );
-    res.status(201).json({ matricula, funcName, setor, inicio, fim });
+    res.status(201).json({ matricula, func_name, setor, inicio, fim });
   } catch (err) {
     if (err.code === "23505") {
       // Duplicado
       res.status(409).json({ error: "Matrícula já existe." });
     } else {
-      console.error(err);
-      res.status(500).json({ error: "Erro ao salvar item." });
+      console.error("Erro detalhado no INSERT:", err);
+      res.status(500).json({
+        error: "Erro ao salvar item.",
+        detalhe: err.message,
+      });
     }
   }
 });
 
 app.put("/items/:matricula", async (req, res) => {
   const { matricula } = req.params;
-  const { funcName, setor, inicio, fim } = req.body;
+  const { func_name, setor, inicio, fim } = req.body;
 
   try {
     const result = await pool.query(
-      "UPDATE items SET funcName = $1, setor = $2, inicio = $3, fim = $4 WHERE matricula = $5 RETURNING *",
-      [funcName, setor, inicio, fim, matricula]
+      "UPDATE items SET func_name = $1, setor = $2, inicio = $3, fim = $4 WHERE matricula = $5 RETURNING *",
+      [func_name, setor, inicio, fim, matricula]
     );
 
     if (result.rowCount === 0) {
