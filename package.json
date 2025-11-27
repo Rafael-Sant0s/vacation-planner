@@ -1,9 +1,11 @@
 {
   "name": "vacationplanner",
   "version": "1.0.0",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
@@ -12,5 +14,8 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

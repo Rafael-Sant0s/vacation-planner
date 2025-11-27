@@ -1,3 +1,4 @@
+/* Fundo do formulário */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -30,7 +31,7 @@
   justify-content: center;
 }
 
-/* Formulário */
+/* Conteúdo do Formulário */
 .form {
   padding: 20px;
 }
@@ -63,9 +64,6 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-.invisivel {
-  display: none;
 }
 
 .form-control select {
@@ -135,4 +133,9 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   gap: 5px;
   padding-bottom: 25px;
+}
+
+/* Classe para tornar um componente invisível */
+.invisible {
+  display: none;
 }

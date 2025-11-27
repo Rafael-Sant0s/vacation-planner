@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styleIndex.css" />
-    <link rel="icon" href="img/VacationPlan.jpg" type="image/jpg" />
+    <link rel="icon" href="./assets/vacationplan.jpg" type="image/jpg" />
 
+    <!--  Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+
+    <!--  Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -19,10 +22,11 @@
 
     <title>VacationPlanner</title>
   </head>
+
   <body>
-    <div id="telaCadastro" style="display: none"></div>
-    <div id="telaEditar" style="display: none"></div>
-    <div class="telaPrincipal" id="telaPrincipal">
+    <div id="registerForm" style="display: none"></div>
+    <div id="editForm" style="display: none"></div>
+    <div class="homePage" id="homePage">
       <nav class="navbar">
         <div class="contentNav">
           <div class="brand">
@@ -35,9 +39,12 @@
       <div class="content">
         <div class="header">
           <h2>Funcionários cadastrados</h2>
-          <button class="abrirCadastro">
-            <i class="fas fa-user-plus"></i>
-          </button>
+          <div>
+            <button class="btnAddForm">
+              <i class="fas fa-user-plus"></i>
+            </button>
+            <button class="export" id="btnExportExcel">Exportar</button>
+          </div>
         </div>
 
         <div class="tableHeader gridRow">
@@ -46,16 +53,29 @@
           <div>Matrícula</div>
           <div>Início</div>
           <div>Fim</div>
-          <div>Status</div>
-          <div></div>
+          <div>
+            Status
+            <button class="sort" id="btnSortByStatus">
+              <i class="fa fa-filter" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div>
+            <button class="remove" id="btnDeleteItems">
+              <i class="fa regular fa-trash-can"></i>
+            </button>
+          </div>
         </div>
 
+        <!-- Tabela dos funcionários -->
         <div class="table">
           <div class="func"></div>
         </div>
       </div>
     </div>
 
-    <script src="scripts.js"></script>
+    <script type="module" src="scripts.js"></script>
+
+    <!-- SheetJS (xlsx) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   </body>
 </html>

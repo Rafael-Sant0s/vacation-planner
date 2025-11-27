@@ -51,6 +51,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-right: 30px;
 }
 
 /* Tabela */
@@ -78,13 +79,35 @@ body {
   border-bottom: 1px solid #ccc;
   min-height: 2.5rem;
   padding: 0.3125rem;
+  transition: background-color 0.3s;
 }
 .textName {
   max-width: 650px;
   word-wrap: break-word;
 }
+.Item:not(.ItemSelected):hover {
+  background-color: rgba(240, 240, 240, 1);
+}
+.ItemSelected {
+  background-color: rgba(197, 211, 236, 0.6);
+}
 
-/* Status */
+/* Mensagem quando não há item na tabela */
+.AlertMessage {
+  width: 100%;
+  display: column;
+  text-align: center;
+  padding: 60px;
+  font-size: 30px;
+  color: rgba(2, 39, 109, 0.6);
+}
+.iconAlert {
+  font-size: 150px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* Classe para cada status */
 .ferias,
 .semAgendamento,
 .agendado,
@@ -113,19 +136,75 @@ body {
 }
 
 /* Botões */
-.abrirEditar {
+.btnEdit {
   margin-left: auto;
   margin-right: 5rem;
   color: rgba(2, 39, 109, 0.6);
+  cursor: pointer;
 }
 
-.abrirCadastro {
+.btnAddForm {
   border: none;
   border-radius: 15px;
   color: white;
   width: 40px;
   background-color: rgba(2, 39, 109, 0.6);
+  transition: background-color 0.3s;
   padding: 0.4rem;
   margin-right: 2rem;
   cursor: pointer;
+}
+.btnAddForm:hover {
+  background-color: rgba(48, 88, 161, 0.6);
+}
+
+.export {
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(2, 39, 109, 0.6);
+  transition: background-color 0.3s;
+  color: white;
+  height: 35px;
+  padding: 0.4rem;
+  cursor: pointer;
+}
+.export:hover {
+  background-color: rgba(48, 88, 161, 0.6);
+}
+
+/* Ícone do filtro */
+.sort {
+  border: none;
+  background-color: rgba(225, 227, 233, 1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.sort:hover {
+  color: rgba(2, 39, 109, 0.6);
+}
+.sort:disabled:hover {
+  color: #a5a5a5ff;
+}
+.sortClicked {
+  border: none;
+  background-color: rgba(225, 227, 233, 1);
+  color: rgba(2, 39, 109, 0.6);
+  cursor: pointer;
+}
+
+/* Ícone do delete */
+.remove {
+  font-size: 15px;
+  border: none;
+  background-color: rgba(225, 227, 233, 1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.remove:hover {
+  color: rgba(2, 39, 109, 0.6);
+}
+
+/* Classe para tornar um componente invisível */
+.invisible {
+  display: none;
 }

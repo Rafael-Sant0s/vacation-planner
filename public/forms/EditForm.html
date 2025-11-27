@@ -1,3 +1,4 @@
+<!-- Classe onde o css do formulário é carregado -->
 <div class="back">
   <div class="container">
     <div class="containerHeader">
@@ -5,10 +6,10 @@
     </div>
     <form id="form" class="form">
       <div class="form-control">
-        <label for="funcName">Nome:</label>
+        <label for="funcNome">Nome:</label>
         <input
           type="text"
-          id="funcName"
+          id="funcNome"
           placeholder="Digite o nome do funcionário..."
         />
 
@@ -33,22 +34,15 @@
         <select id="setor" name="setor">
           <option value="" disabled selected hidden>Selecione um setor</option>
           <option value="presidencia">PRESIDÊNCIA</option>
-          <option value="juridica">ASSESSORIA JURÍDICA</option>
-          <option value="comunicacao">COMUNICAÇÃO</option>
-          <option value="dirAdm">DIRETORIA ADMINISTRATIVA</option>
-          <option value="dirCult">DIRETORIA CULTURAL</option>
-          <option value="contratos">CONTRATOS</option>
-          <option value="arquivo">ARQUIVO PÚBLICO</option>
-          <option value="lif">LIF/FMC</option>
-          <option value="gac">GAC</option>
-          <option value="gef">GEF</option>
-          <option value="gos">GOS</option>
-          <option value="gpc">GPC</option>
-          <option value="gph">GPH</option>
-          <option value="grh">GRH</option>
-          <option value="grm">GRM</option>
-          <option value="gsa">GSA</option>
-          <option value="gsi">GSI</option>
+          <option value="juridico">JURÍDICO</option>
+          <option value="administracao">ADMINISTRAÇÃO</option>
+          <option value="comercial">COMERCIAL</option>
+          <option value="financeiro">FINANCEIRO</option>
+          <option value="rh">RH</option>
+          <option value="marketing">MARKETING</option>
+          <option value="logistica">LOGÍSTICA</option>
+          <option value="informatica">INFORMÁTICA</option>
+          <option value="sac">SAC</option>
         </select>
 
         <small>Mensagem de erro</small>
@@ -78,11 +72,11 @@
         <input type="checkbox" id="checkbox" />
       </div>
       <div class="buttons">
-        <button type="submit" id="btnAtualizar" class="new-item-button">
+        <button type="submit" id="btnUpdate" class="new-item-button">
           Atualizar
         </button>
-        <button type="button" id="btnCancelar">Cancelar</button>
-        <button type="button" id="btnExcluir">Excluir</button>
+        <button type="button" id="btnCancel">Cancelar</button>
+        <button type="button" id="btnDelete">Excluir</button>
       </div>
     </form>
   </div>
