@@ -20,9 +20,6 @@ const pool = new Pool({
   },
 });
 
-// Permite servir arquivos estáticos da pasta "public"
-app.use(express.static("public"));
-
 // Permite o carregamento de recursos de origens externas (helmet)
 app.use(
   helmet({
@@ -163,6 +160,9 @@ app.post("/items/delete", async (req, res) => {
     res.status(500).json({ error: "Erro ao deletar itens." });
   }
 });
+
+// Permite servir arquivos estáticos da pasta "public"
+app.use(express.static("public"));
 
 // Inicia o servidor
 app.listen(PORT, () => {
