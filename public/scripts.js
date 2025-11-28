@@ -10,7 +10,7 @@ import {
   preencherFormulario,
 } from "./utils.js";
 
-const API_URL = "https://vacation-planner-sn90.onrender.com/";
+const API_URL = "https://vacation-planner-sn90.onrender.com";
 
 // Faz o fetch do HTML da tela que será renderizada.
 const carregarTela = (btnSelector, telaId, htmlFile) => {
