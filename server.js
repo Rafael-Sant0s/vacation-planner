@@ -38,20 +38,7 @@ const allowedOrigins = [
 ];
 
 // Configuração do CORS
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Permite requisições sem origin
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
 
 // Interpreta requisições com corpo JSON
 app.use(express.json({ limit: "10kb" }));
