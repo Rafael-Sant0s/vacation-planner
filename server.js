@@ -23,10 +23,27 @@ const pool = new Pool({
 // Permite o carregamento de recursos de origens externas (helmet)
 app.use(
   helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "https://cdnjs.cloudflare.com",
+          "https://cdn.jsdelivr.net",
+        ],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://cdnjs.cloudflare.com",
+          "https://fonts.googleapis.com",
+        ],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        imgSrc: ["'self'", "data:"],
+      },
+    },
     crossOriginResourcePolicy: false,
   })
 );
-
 // Define as origens permitidas para o CORS
 const allowedOrigins = [
   "http://localhost:5500",
