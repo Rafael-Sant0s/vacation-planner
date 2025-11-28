@@ -34,7 +34,7 @@ app.use(
 const allowedOrigins = [
   "http://localhost:5500",
   "http://127.0.0.1:5500", // Frontend local
-  "https://vacation-planner-dzc6.onrender.com", // Frontend em produção
+  "https://vacation-planner-sn90.onrender.com/", // Frontend em produção
 ];
 
 // Configuração do CORS
