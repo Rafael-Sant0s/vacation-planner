@@ -15,6 +15,9 @@ const PORT = process.env.PORT || 3000;
 // Pool de conexões com o PostgreSQL
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 // Permite servir arquivos estáticos da pasta "public"
@@ -162,4 +165,6 @@ app.post("/items/delete", async (req, res) => {
 });
 
 // Inicia o servidor
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
