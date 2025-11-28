@@ -1,13 +1,10 @@
+// server.js
+import "dotenv/config"; // Carrega variáveis de ambiente do .env
+import express from "express";
 import pkg from "pg";
-// Carrega variáveis de ambiente do arquivo .env
-require("dotenv").config();
-
-// Dependências
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const { Pool } = require("pkg");
-
+import cors from "cors";
+import helmet from "helmet";
+const { Pool } = pkg;
 // Instância do Express
 const app = express();
 // Porta do servidor
