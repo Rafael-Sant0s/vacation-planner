@@ -57,6 +57,9 @@ app.use(express.json({ limit: "10kb" }));
 })();
 
 // Rotas da API
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
 // GET: Retorna os registros da tabela.
 app.get("/items", async (req, res) => {
   const result = await pool.query("SELECT * FROM items");
