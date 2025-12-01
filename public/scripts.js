@@ -15,18 +15,30 @@ const API_URL = "https://vacation-planner-sn90.onrender.com";
 // Faz o fetch do HTML da tela que será renderizada.
 const carregarTela = (btnSelector, telaId, htmlFile) => {
   const promises = [];
+
   document.querySelectorAll(btnSelector).forEach((btn) => {
     const promise = fetch(htmlFile)
       .then((response) => response.text())
-      .then((html) => {
+      .then(async (html) => {
         const container = document.getElementById(telaId);
+
+        // Evita piscar
+        container.style.visibility = "hidden";
+
+        // Aguarda CSS
+        await carregarCSS();
+
+        // Insere o HTML
         container.innerHTML = html;
 
-        // Evita duplicar o CSS.
-        carregarCSS();
-
+        // Inicializa
         initializeForm(telaId);
+
+        // Agora mostra a tela (mas ainda invisível)
         toggleTela(telaId, true);
+
+        // Finalmente revela suavemente
+        container.style.visibility = "visible";
       })
       .catch((err) => console.error(`Erro ao carregar ${htmlFile}:`, err));
 
@@ -46,13 +58,26 @@ let selectedItems = [];
 // Tabela de items.
 const itemContainer = document.querySelector(".table .func");
 
+// Botão para aplicar o filtro.
+const btnSortByStatus = document.getElementById("btnSortByStatus");
+btnSortByStatus.addEventListener("click", () => {
+  if (!sortByStatus) {
+    btnSortByStatus.classList.add("sortClicked");
+  } else {
+    btnSortByStatus.classList.remove("sortClicked");
+  }
+  sortByStatus = !sortByStatus;
+  // Salva o valor do filtro no localStorage.
+  localStorage.setItem("ordenarPorStatus", sortByStatus);
+
+  refreshItemsAPI(sortByStatus, sortByName);
+});
+
 //mostra uma mensagem caso a tabela não tenha funcionários cadastrados.
 async function checkEmptyTable(firstTime) {
   try {
     const response = await fetch(`${API_URL}/items/empty`);
     const data = await response.json();
-
-    const btnSortByStatus = document.getElementById("btnSortByStatus");
 
     // Remove mensagem antiga, se existir.
     const msg = itemContainer.querySelector(".AlertMessage");
@@ -132,6 +157,7 @@ const refreshItemsAPI = async (
   sortByName = false,
   firstTime
 ) => {
+  btnSortByStatus.classList.add("invisible");
   try {
     const response = await fetch(`${API_URL}/items`);
     const items = await response.json();
@@ -274,21 +300,6 @@ btnDeleteItems.addEventListener("click", async () => {
   selectedItems = [];
 
   await refreshItemsAPI(sortByStatus, sortByName, false);
-});
-
-// Botão para aplicar o filtro.
-const btnSortByStatus = document.getElementById("btnSortByStatus");
-btnSortByStatus.addEventListener("click", () => {
-  if (!sortByStatus) {
-    btnSortByStatus.classList.add("sortClicked");
-  } else {
-    btnSortByStatus.classList.remove("sortClicked");
-  }
-  sortByStatus = !sortByStatus;
-  // Salva o valor do filtro no localStorage.
-  localStorage.setItem("ordenarPorStatus", sortByStatus);
-
-  refreshItemsAPI(sortByStatus, sortByName);
 });
 
 // Inicializa a aplicação após o carregamento do DOM.

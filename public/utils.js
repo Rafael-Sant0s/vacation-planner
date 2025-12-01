@@ -11,12 +11,21 @@ export const toggleTela = (telaId, show) => {
 
 // Carrega o CSS da tela.
 export function carregarCSS() {
-  if (!document.querySelector('link[href="styleForm.css"]')) {
+  return new Promise((resolve) => {
+    const existing = document.querySelector('link[href="styleForm.css"]');
+
+    if (existing) {
+      if (existing.sheet) resolve();
+      else existing.onload = resolve;
+      return;
+    }
+
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "styleForm.css";
+    link.onload = resolve;
     document.head.appendChild(link);
-  }
+  });
 }
 
 // Calcular o status do funcionário.
