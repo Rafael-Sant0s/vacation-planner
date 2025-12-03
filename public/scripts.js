@@ -13,40 +13,23 @@ import {
 const API_URL = "https://vacation-planner-sn90.onrender.com";
 
 // Faz o fetch do HTML da tela que será renderizada.
-const carregarTela = (btnSelector, telaId, htmlFile, callback) => {
-  const promises = [];
+const carregarTela = async (telaId, htmlFile, callback) => {
+  try {
+    const html = await fetch(htmlFile).then((res) => res.text());
+    const container = document.getElementById(telaId);
 
-  document.querySelectorAll(btnSelector).forEach((btn) => {
-    const promise = fetch(htmlFile)
-      .then((response) => response.text())
-      .then(async (html) => {
-        const container = document.getElementById(telaId);
+    container.style.visibility = "hidden";
+    await carregarCSS();
+    container.innerHTML = html;
 
-        // Evita piscar
-        container.style.visibility = "hidden";
+    initializeForm(telaId);
+    if (callback) callback();
 
-        // Aguarda CSS
-        await carregarCSS();
-
-        // Insere o HTML
-        container.innerHTML = html;
-
-        // Inicializa
-        initializeForm(telaId);
-
-        if (callback) callback();
-        // Agora mostra a tela (mas ainda invisível)
-        toggleTela(telaId, true);
-
-        // Finalmente revela suavemente
-        container.style.visibility = "visible";
-      })
-      .catch((err) => console.error(`Erro ao carregar ${htmlFile}:`, err));
-
-    promises.push(promise);
-  });
-
-  return promises[0];
+    toggleTela(telaId, true);
+    container.style.visibility = "visible";
+  } catch (err) {
+    console.error(`Erro ao carregar ${htmlFile}:`, err);
+  }
 };
 
 // variáveis para ordenação.
@@ -106,11 +89,7 @@ async function checkEmptyTable(firstTime) {
         document.querySelectorAll(".iconAlert").forEach((btn) => {
           btn.addEventListener("click", () => {
             clearSelectedItems();
-            carregarTela(
-              ".iconAlert",
-              "registerForm",
-              "forms/RegisterForm.html"
-            );
+            carregarTela("registerForm", "forms/RegisterForm.html");
           });
         });
       }
@@ -225,9 +204,9 @@ const refreshItemsAPI = async (
       btnEdit.addEventListener("click", (event) => {
         event.stopPropagation();
 
-        carregarTela(".btnEdit", "editForm", "forms/EditForm.html", () => {
+        carregarTela("editForm", "forms/EditForm.html", () => {
           clearSelectedItems();
-          preencherFormulario(item); // AGORA FUNCIONA, HTML EXISTE!
+          preencherFormulario(item);
         });
       });
 
@@ -299,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btnAddForm").forEach((btn) => {
     btn.addEventListener("click", () => {
       clearSelectedItems();
-      carregarTela(".btnAddForm", "registerForm", "forms/RegisterForm.html");
+      carregarTela("registerForm", "forms/RegisterForm.html");
     });
   });
 });
@@ -499,12 +478,32 @@ function initializeForm(telaId) {
     return isValid;
   }
 
-  // Botão para cadastrar.
-  const addItemButton = tela.querySelector("#btnCreate");
-  if (addItemButton) {
-    addItemButton.addEventListener("click", async (e) => {
-      e.preventDefault();
+  // === BOTÕES: clonagem para remover listeners antigos e adição de listeners ===
 
+  // Seleciona os botões
+  const addItemButton = tela.querySelector("#btnCreate");
+  const btnUpdate = tela.querySelector("#btnUpdate");
+  const btnDelete = tela.querySelector("#btnDelete");
+  const btnCancel = tela.querySelector("#btnCancel");
+
+  // Função para clonar botão e limpar listeners antigos
+  function resetButton(button) {
+    if (!button) return null;
+    const clone = button.cloneNode(true);
+    button.parentNode.replaceChild(clone, button);
+    return clone;
+  }
+
+  // Clona os botões antes de adicionar listeners
+  const cleanAddItemButton = resetButton(addItemButton);
+  const cleanUpdateButton = resetButton(btnUpdate);
+  const cleanDeleteButton = resetButton(btnDelete);
+  const cleanCancelButton = resetButton(btnCancel);
+
+  // Adiciona os listeners nos botões clonados
+  if (cleanAddItemButton) {
+    cleanAddItemButton.addEventListener("click", async (e) => {
+      e.preventDefault();
       if (!(await checkInputs())) return;
 
       const item = {
@@ -520,65 +519,14 @@ function initializeForm(telaId) {
       };
 
       await salvarItemNoServidor(API_URL, item);
-
       await refreshItemsAPI(sortByStatus, sortByName);
-
       toggleTela(telaId, false);
     });
   }
 
-  // Botão para cancelar.
-  const btnCancel = tela.querySelector("#btnCancel");
-  if (btnCancel) {
-    btnCancel.addEventListener("click", () => {
-      toggleTela(telaId, false);
-    });
-  }
-
-  // Botão para excluir.
-  const btnDelete = tela.querySelector("#btnDelete");
-  if (btnDelete) {
-    btnDelete.addEventListener("click", async (e) => {
+  if (cleanUpdateButton) {
+    cleanUpdateButton.addEventListener("click", async (e) => {
       e.preventDefault();
-
-      // Pega a matrícula original, não a que está visível.
-      const matriculaOriginal = tela.querySelector("#matriculaOriginal")?.value;
-      if (!matriculaOriginal) {
-        alert("Matrícula não encontrada.");
-        return;
-      }
-
-      const confirmation = confirm("Tem certeza que deseja excluir este item?");
-      if (!confirmation) return;
-
-      try {
-        const response = await fetch(`${API_URL}/items/${matriculaOriginal}`, {
-          method: "DELETE",
-        });
-
-        if (!response.ok) {
-          alert("Erro ao excluir o item.");
-          return;
-        }
-
-        // Atualiza a lista com nova ordem
-        await refreshItemsAPI(sortByStatus, sortByName, false);
-
-        // Fecha a tela de edição
-        toggleTela(telaId, false);
-      } catch (error) {
-        console.error("Erro ao excluir item:", error);
-        alert("Erro na comunicação com o servidor.");
-      }
-    });
-  }
-
-  // Botão para Atualizar.
-  const btnUpdate = tela.querySelector("#btnUpdate");
-  if (btnUpdate) {
-    btnUpdate.addEventListener("click", async (e) => {
-      e.preventDefault();
-
       if (!(await checkInputs(true))) return;
 
       const matriculaOriginal = tela.querySelector("#matriculaOriginal")?.value;
@@ -612,14 +560,49 @@ function initializeForm(telaId) {
           return;
         }
 
-        // Recarrega lista já com ordenação correta
         await refreshItemsAPI(sortByStatus, sortByName);
-        // Fecha tela de edição
         toggleTela(telaId, false);
       } catch (error) {
         alert("Erro na comunicação com o servidor.");
         console.error(error);
       }
+    });
+  }
+
+  if (cleanDeleteButton) {
+    cleanDeleteButton.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const matriculaOriginal = tela.querySelector("#matriculaOriginal")?.value;
+      if (!matriculaOriginal) {
+        alert("Matrícula não encontrada.");
+        return;
+      }
+
+      const confirmation = confirm("Tem certeza que deseja excluir este item?");
+      if (!confirmation) return;
+
+      try {
+        const response = await fetch(`${API_URL}/items/${matriculaOriginal}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          alert("Erro ao excluir o item.");
+          return;
+        }
+
+        await refreshItemsAPI(sortByStatus, sortByName, false);
+        toggleTela(telaId, false);
+      } catch (error) {
+        console.error("Erro ao excluir item:", error);
+        alert("Erro na comunicação com o servidor.");
+      }
+    });
+  }
+
+  if (cleanCancelButton) {
+    cleanCancelButton.addEventListener("click", () => {
+      toggleTela(telaId, false);
     });
   }
 }
