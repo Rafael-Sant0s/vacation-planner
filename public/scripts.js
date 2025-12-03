@@ -13,7 +13,7 @@ import {
 const API_URL = "https://vacation-planner-sn90.onrender.com";
 
 // Faz o fetch do HTML da tela que será renderizada.
-const carregarTela = (btnSelector, telaId, htmlFile) => {
+const carregarTela = (btnSelector, telaId, htmlFile, callback) => {
   const promises = [];
 
   document.querySelectorAll(btnSelector).forEach((btn) => {
@@ -34,6 +34,7 @@ const carregarTela = (btnSelector, telaId, htmlFile) => {
         // Inicializa
         initializeForm(telaId);
 
+        if (callback) callback();
         // Agora mostra a tela (mas ainda invisível)
         toggleTela(telaId, true);
 
@@ -224,22 +225,10 @@ const refreshItemsAPI = async (
       btnEdit.addEventListener("click", (event) => {
         event.stopPropagation();
 
-        fetch("./forms/EditForm.html")
-          .then((response) => response.text())
-          .then((html) => {
-            const container = document.getElementById("editForm");
-            container.innerHTML = html;
-
-            carregarCSS();
-            clearSelectedItems();
-
-            initializeForm("editForm");
-            preencherFormulario(item);
-            toggleTela("editForm", true);
-          })
-          .catch((err) =>
-            console.error("Erro ao carregar editForm.html:", err)
-          );
+        carregarTela(".btnEdit", "editForm", "forms/EditForm.html", () => {
+          clearSelectedItems();
+          preencherFormulario(item); // AGORA FUNCIONA, HTML EXISTE!
+        });
       });
 
       // seleção de item.

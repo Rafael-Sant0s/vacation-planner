@@ -17,15 +17,16 @@
 /* Container do formulário */
 .container {
   background-color: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  width: 500px;
+  border-radius: 0.6875rem;
+  box-shadow: 0 0.1375rem 0.34375rem rgba(0, 0, 0, 0.3);
+  width: 34.375rem;
   max-width: 100%;
   overflow: hidden;
+  margin: 30px;
 }
 .containerHeader {
   background-color: rgba(225, 227, 233, 1);
-  padding: 20px;
+  padding: 1.375rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -33,26 +34,26 @@
 
 /* Conteúdo do Formulário */
 .form {
-  padding: 20px;
+  padding: 1.375rem;
 }
 .form-control {
-  padding-bottom: 25px;
+  padding-bottom: 1.71875rem;
   position: relative;
 }
 
 .form-control label {
   display: inline-block;
-  margin-bottom: 5px;
+  margin-bottom: 0.34375rem;
   font-weight: 600;
 }
 
 .form-control input {
-  border: 2px solid #f0f0f0;
+  border: 0.1375rem solid #f0f0f0;
   display: block;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 0.6875rem;
+  font-size: 0.9625rem;
   width: 100%;
-  padding: 12px;
+  padding: 0.825rem;
 }
 input[type="date"] {
   color: #000000ff;
@@ -67,18 +68,18 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .form-control select {
-  border: 2px solid #f0f0f0;
+  border: 0.1375rem solid #f0f0f0;
   display: block;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 0.6875rem;
+  font-size: 0.9625rem;
   width: 100%;
-  padding: 12px;
+  padding: 0.825rem;
   color: #000000ff;
 }
 
 .form-control-days {
   justify-content: space-around;
-  padding-bottom: 20px;
+  padding-bottom: 1.375rem;
   text-align: center;
   font-weight: 450;
   display: none;
@@ -87,9 +88,9 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Mensagem de erro */
 .form-control small {
   position: absolute;
-  bottom: 5px;
+  bottom: 0.34375rem;
   left: 0;
-  font-size: 12px;
+  font-size: 0.825rem;
   visibility: hidden;
 }
 
@@ -97,10 +98,10 @@ input[type="number"]::-webkit-inner-spin-button {
 .form button {
   background-color: rgba(2, 39, 109, 0.6);
   color: #fff;
-  font-size: 20px;
-  border-radius: 10px;
+  font-size: 1.375rem;
+  border-radius: 0.6875rem;
   border: none;
-  padding: 15px;
+  padding: 1.03125rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -131,8 +132,8 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Checkbox*/
 .form-control-status {
   display: flex;
-  gap: 5px;
-  padding-bottom: 25px;
+  gap: 0.34375rem;
+  padding-bottom: 1.71875rem;
 }
 
 /* Classe para tornar um componente invisível */
