@@ -71,6 +71,9 @@ body {
   border-top-left-radius: 0.6875rem;
   border-top-right-radius: 0.6875rem;
   padding: 0.34375rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 /* Item da tabela (funcionário) */

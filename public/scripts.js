@@ -137,7 +137,6 @@ const refreshItemsAPI = async (
   sortByName = false,
   firstTime
 ) => {
-  btnSortByStatus.classList.add("invisible");
   try {
     const response = await fetch(`${API_URL}/items`);
     const items = await response.json();

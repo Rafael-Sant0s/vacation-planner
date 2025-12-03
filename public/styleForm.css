@@ -1,3 +1,13 @@
+@media (max-width: 500px) {
+  .container {
+    width: 95%;
+    padding: 0.8rem;
+  }
+
+  .form {
+    padding: 0.8rem;
+  }
+}
 /* Fundo do formulário */
 * {
   box-sizing: border-box;
@@ -19,10 +29,10 @@
   background-color: #fafafa;
   border-radius: 0.6875rem;
   box-shadow: 0 0.1375rem 0.34375rem rgba(0, 0, 0, 0.3);
-  width: 34.375rem;
-  max-width: 100%;
+  width: 550px;
+  max-width: 34.375rem;
+  margin: 30px auto;
   overflow: hidden;
-  margin: 30px;
 }
 .containerHeader {
   background-color: rgba(225, 227, 233, 1);
@@ -79,7 +89,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .form-control-days {
   justify-content: space-around;
-  padding-bottom: 1.375rem;
+  padding-bottom: 1rem;
   text-align: center;
   font-weight: 450;
   display: none;
@@ -133,7 +143,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .form-control-status {
   display: flex;
   gap: 0.34375rem;
-  padding-bottom: 1.71875rem;
+  padding-bottom: 0.6rem;
 }
 
 /* Classe para tornar um componente invisível */
